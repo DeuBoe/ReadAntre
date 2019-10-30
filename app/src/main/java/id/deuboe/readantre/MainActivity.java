@@ -1,26 +1,60 @@
 package id.deuboe.readantre;
 
-import android.content.Intent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+  private AdapterList adapterList;
+  private List<Model> modelList;
+  private ProgressBar progressBar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    Button button = findViewById(R.id.button);
-    button.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Intent intent = new Intent(getApplicationContext(), ReadActivity.class);
-        startActivity(intent);
-      }
-    });
+    progressBar = findViewById(R.id.progress_bar);
+
+    RecyclerView recyclerView = findViewById(R.id.list);
+    recyclerView.setHasFixedSize(true);
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+    modelList = new ArrayList<>();
+    adapterList = new AdapterList(this, modelList);
+
+    recyclerView.setAdapter(adapterList);
+
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
+    firestore.collection("users").get()
+        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+          @Override
+          public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+            progressBar.setVisibility(View.GONE);
+
+            if (!queryDocumentSnapshots.isEmpty()) {
+              List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+
+              for (DocumentSnapshot documentReference : list) {
+                Model model = documentReference.toObject(Model.class);
+                modelList.add(model);
+              }
+
+              adapterList.notifyDataSetChanged();
+            }
+          }
+        });
   }
 }
