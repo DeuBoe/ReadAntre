@@ -1,3 +1,16 @@
 <resources>
   <string name="app_name">Read Antre</string>
+  <string name="tab_text_1">Mandiri</string>
+  <string name="tab_text_2">Mewakilkan</string>
+  <string name="nama">Nama</string>
+  <string name="nama_dalam_ktp">Nama dalam Ktp</string>
+  <string name="tanggal_lahir">Tanggal lahir</string>
+  <string name="pekerjaan">Pekerjaan</string>
+  <string name="nomor_ktp">Nomor Ktp</string>
+  <string name="id">Id</string>
+  <string name="alamat">Alamat</string>
+  <string name="batas">Data yang diwakili</string>
+  <string name="pilihan">Pilihan</string>
+  <string name="nomor_surat_kuasa">Nomor surat kuasa</string>
+  <string name="tanggal">Tanggal</string>
 </resources>

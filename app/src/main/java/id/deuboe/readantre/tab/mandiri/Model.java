@@ -1,14 +1,26 @@
-package id.deuboe.readantre;
+package id.deuboe.readantre.tab.mandiri;
 
 public class Model {
 
-  private String name, ktp, dateOfBirth, profession, idKtp, address, idPowerOfAttorney, date;
+  private String name, ktp, dateOfBirth, profession, idKtp, address, idPowerOfAttorney, date, spinner, id, sort, today;
 
   public Model() {
 
   }
 
-  public Model(String name, String ktp, String dateOfBirth, String profession, String idKtp, String address, String idPowerOfAttorney, String date) {
+  public Model(
+      String name,
+      String ktp,
+      String dateOfBirth,
+      String profession,
+      String idKtp,
+      String address,
+      String idPowerOfAttorney,
+      String date,
+      String spinner,
+      String id,
+      String sort,
+      String today) {
     this.name = name;
     this.ktp = ktp;
     this.dateOfBirth = dateOfBirth;
@@ -17,6 +29,10 @@ public class Model {
     this.address = address;
     this.idPowerOfAttorney = idPowerOfAttorney;
     this.date = date;
+    this.spinner = spinner;
+    this.id = id;
+    this.sort = sort;
+    this.today = today;
   }
 
   public String getName() {
@@ -51,8 +67,20 @@ public class Model {
     return date;
   }
 
-//  public String getChoice() {
-//    return choice;
-//  }
+  public String getSpinner() {
+    return spinner;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public String getSort() {
+    return sort;
+  }
+
+  public String getToday() {
+    return today;
+  }
 }
 

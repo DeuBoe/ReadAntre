@@ -1,60 +1,52 @@
 package id.deuboe.readantre;
 
-import android.view.View;
-import android.widget.ProgressBar;
+
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-import java.util.ArrayList;
-import java.util.List;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
+import com.google.android.material.tabs.TabLayout.Tab;
+import com.google.android.material.tabs.TabLayout.TabLayoutOnPageChangeListener;
+import id.deuboe.readantre.tab.adapter.PageAdapter;
 
 public class MainActivity extends AppCompatActivity {
-
-  private AdapterList adapterList;
-  private List<Model> modelList;
-  private ProgressBar progressBar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    progressBar = findViewById(R.id.progress_bar);
+//    Toolbar toolbar = findViewById(R.id.toolbar);
+//    setSupportActionBar(toolbar);
+//    setTitle("Antrean");
 
-    RecyclerView recyclerView = findViewById(R.id.list);
-    recyclerView.setHasFixedSize(true);
-    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//    TabLayout tabLayout = findViewById(R.id.tab_layout);
+//    tabLayout.addTab(tabLayout.newTab().setText("Mandiri"));
+//    tabLayout.addTab(tabLayout.newTab().setText("Mewakili"));
+//    tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+    ViewPager viewPager = findViewById(R.id.pager);
+    PageAdapter pageAdapter = new PageAdapter(this, getSupportFragmentManager());
+    viewPager.setAdapter(pageAdapter);
+    TabLayout tabLayout = findViewById(R.id.tab_layout);
+    tabLayout.setupWithViewPager(viewPager);
+    tabLayout.addOnTabSelectedListener(new OnTabSelectedListener() {
+      @Override
+      public void onTabSelected(Tab tab) {
 
-    modelList = new ArrayList<>();
-    adapterList = new AdapterList(this, modelList);
+      }
 
-    recyclerView.setAdapter(adapterList);
+      @Override
+      public void onTabUnselected(Tab tab) {
 
-    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+      }
 
-    firestore.collection("users").get()
-        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-          @Override
-          public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+      @Override
+      public void onTabReselected(Tab tab) {
 
-            progressBar.setVisibility(View.GONE);
-
-            if (!queryDocumentSnapshots.isEmpty()) {
-              List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-
-              for (DocumentSnapshot documentReference : list) {
-                Model model = documentReference.toObject(Model.class);
-                modelList.add(model);
-              }
-
-              adapterList.notifyDataSetChanged();
-            }
-          }
-        });
+      }
+    });
   }
 }
