@@ -1,5 +1,6 @@
 package id.deuboe.readantre.tab.mandiri;
 
+
 public class Model {
 
   private String name, ktp, dateOfBirth, profession, idKtp, address, idPowerOfAttorney, date, spinner, id, sort, today;
@@ -82,5 +83,6 @@ public class Model {
   public String getToday() {
     return today;
   }
+
 }
 

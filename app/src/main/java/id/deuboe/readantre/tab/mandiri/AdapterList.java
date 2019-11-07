@@ -1,16 +1,14 @@
 package id.deuboe.readantre.tab.mandiri;
 
 import android.annotation.SuppressLint;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import id.deuboe.readantre.R;
 import java.util.List;
@@ -19,6 +17,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ReadViewHolder
 
   private List<Model> list;
   private LayoutInflater layoutInflater;
+
 
   class ReadViewHolder extends RecyclerView.ViewHolder {
 
@@ -50,7 +49,6 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ReadViewHolder
       textId = view.findViewById(R.id.id_text);
       textSort = view.findViewById(R.id.numberOfSort_text);
       textToday = view.findViewById(R.id.today_text);
-
     }
 
   }
